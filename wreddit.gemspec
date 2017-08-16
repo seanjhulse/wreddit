@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Turn Reddit's API into a simple class}
   spec.description   = %q{Reddit has a built-in API with JSON requests. The WReddit class allows users to access the JSON data for quick applications}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = %q{https://github.com/CoffeeAndCream/wreddit}
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
