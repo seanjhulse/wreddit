@@ -34,7 +34,8 @@ In this example, we'd be grabbing the subreddit and its comments in a specific t
 ```
     @reddit_comments = wreddit.subreddit('learnprogramming').comments('specific_article_id').parse
 ```
-Getting top links to articles in subreddit
+If you just quickly want to get the links, titles, or descriptions for articles/comments, I made some snappy methods.
+You don't have to parse them. For now, it assumes that you want an array from the JSON object. Getting top links to articles in subreddit
 ```
     @reddit_links = wreddit.subreddit('learnprogramming').links
 ```
