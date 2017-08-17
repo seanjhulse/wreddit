@@ -1,15 +1,17 @@
 require "spec_helper"
-include Wreddit
 
 RSpec.describe Wreddit do
   it "has a version number" do
     expect(Wreddit::VERSION).not_to be nil
   end
 
-  subject { Wreddit }
+  subject { Wreddit.new }
 
   describe '#user' do
       let(:input) { 'learnprogramming' }
-      let(:output) { subject.subreddit(input).comments('6u2pjp').title("what_are_some_of_the_challenges_of_building_a").comment("dlpgqkn").parser }
+      let(:output) { subject.subreddit(input).links }
+      it 'outputs an array of something' do
+        expect(output).not_to be_nil
+      end
   end
 end
