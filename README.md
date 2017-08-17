@@ -51,9 +51,9 @@ Getting top descriptions of articles in subreddit
 You cannot assume that any of these methods together will provide some response. Logically, some of these will render nil arrays. However, you'd be surprised by some things you can do. Like:
 In this example, we'd be grabbing the subreddit, its comments in a specific thread
 ```
-    @reddit_comment = wreddit.user('myusername').links #provides valid links to user submitted threads
+    @stuff = wreddit.user('myusername').links #provides valid links to user submitted threads
 
-    @reddit_comment = wreddit.user('myusername').descriptions #provides valid descriptions to user submitted comments
+    @stuff = wreddit.user('myusername').descriptions #provides valid descriptions to user submitted comments
 ```
 
 But you would <b>NOT</b> be able to write something like:
