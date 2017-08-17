@@ -26,7 +26,7 @@ As of v.1.0.2 we are using the Wreddit class.
 <b>subreddit</b> -> checks for subreddit. If left empty, it'll default to /r/all.<br>
 <b>parse</b>     -> will parse the response in JSON format by default. If you'd like to parse XML or HTTP, you can do that like this:
 ```
-...parser('xml') or parser('html') or parser('json')
+...parse('xml') or parse('html') or parse('json')
 ```
 
 ###### Example of advanced usage
