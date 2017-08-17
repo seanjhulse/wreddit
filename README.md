@@ -53,7 +53,7 @@ In this example, we'd be grabbing the subreddit, its comments in a specific thre
 ```
     @stuff = wreddit.user('myusername').links #provides valid links to user submitted threads
 
-    @stuff = wreddit.user('myusername').descriptions #provides valid descriptions to user submitted comments
+    @stuff = wreddit.user('myusername').descriptions #provides valid descriptions to commments
 ```
 
 But you would <b>NOT</b> be able to write something like:
