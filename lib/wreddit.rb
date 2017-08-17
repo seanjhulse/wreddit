@@ -4,6 +4,7 @@ require 'httparty'
 
 
 class Wreddit
+  include HTTParty
   def initialize
     @uri = "https://www.reddit.com"
   end
