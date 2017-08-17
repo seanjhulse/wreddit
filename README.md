@@ -5,7 +5,7 @@ WReddit: Reddit API wrapper for Ruby
 A Reddit API Wrapper built in Ruby to play with my own Gem. It really only helps you grab subreddit information and user information.
 
 ##### What makes this special?
-It's utilizing Reddit's free API resources. You can't make a lot of requests, but if you cache them using Redis, you could probably use this on a small toy app for yourself. It's a good way to quickly grab Reddit subreddits, comments, articles, and user profiles for your application.
+It's utilizing Reddit's free API resources. That means you don't need any authorization to make requests. You can't make a lot of requests, but if you cache them using Redis, you could probably use this on a small toy app for yourself. It's a good way to quickly grab Reddit subreddits, comments, articles, and user profiles for your application.
 
 ## Install
 add this to your Gemfile:
