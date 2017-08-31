@@ -1,11 +1,13 @@
 require 'json'
 require 'nokogiri'
 require 'httparty'
-
+require 'redis'
 
 class Wreddit
   include HTTParty
+
   def initialize
+    @client = Redis.new
     @uri = "https://www.reddit.com"
   end
   # standard requests
@@ -42,8 +44,8 @@ class Wreddit
   # unique parsing (currently only works in JSON)
   def links
     links = []
-    response = self.json
-    if response.code == 200
+    response = JSON.parse(self.json)
+    unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         links.push(child['data']['url'])
       end
@@ -55,8 +57,8 @@ class Wreddit
 
   def titles
     titles = []
-    response = self.json
-    if response.code == 200
+    response = JSON.parse(self.json)
+    unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         titles.push(child['data']['title'])
       end
@@ -68,8 +70,8 @@ class Wreddit
 
   def descriptions
     descriptions = []
-    response = self.json
-    if response.code == 200
+    response = JSON.parse(self.json)
+    unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         descriptions.push(child['data']['selftext'])
       end
@@ -81,15 +83,63 @@ class Wreddit
 
   # parse helpers
   def json
-    HTTParty.get(URI(@uri + '.json'))
+    response = ''
+    @uri+='.json'
+    res = @client.get(@uri)
+    if res
+      # if res exists
+      return res
+    else
+      # if res doesn't exist get it from HTTParty
+      res = HTTParty.get(URI(@uri))
+      if res.code == 200
+        # if res is an OK (we are getting data)
+        @client.set(@uri, res, ex: 1)
+      else
+        # return 401, 429, or 500 error codes
+        return res
+      end
+      return res
+    end
   end
 
   def xml
-    HTTParty.get(URI(@uri + '.xml'))
+    @uri+='.xml'
+    res = @client.get(@uri)
+    if res
+      # if res exists
+      return res
+    else
+      # if res doesn't exist get it from HTTParty
+      res = HTTParty.get(URI(@uri))
+      if res.code == 200
+        # if res is an OK (we are getting data)
+        @client.set(@uri, res)
+      else
+        # return 401, 429, or 500 error codes
+        return res
+      end
+      return res
+    end
   end
 
   def html
-    HTTParty.get(URI(@uri))
+    res = @client.get(@uri)
+    if res
+      # if res exists
+      return res
+    else
+      # if res doesn't exist get it from HTTParty
+      res = HTTParty.get(URI(@uri))
+      if res.code == 200
+        # if res is an OK (we are getting data)
+        @client.set(@uri, res)
+      else
+        # return 401, 429, or 500 error codes
+        return res
+      end
+      return res
+    end
   end
 
   # general parsing

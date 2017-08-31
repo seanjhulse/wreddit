@@ -7,11 +7,12 @@ RSpec.describe Wreddit do
 
   subject { Wreddit.new }
 
-  describe '#user' do
+  describe '#subreddit' do
       let(:input) { 'learnprogramming' }
       let(:output) { subject.subreddit(input).links }
       it 'outputs an array of something' do
         expect(output).not_to be_nil
       end
   end
+
 end
