@@ -105,7 +105,7 @@ class Wreddit
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res , ex: 10)
+        @client.set(@uri, res , ex: 60)
         res = @client.get(@uri)
         return res
       end
@@ -121,7 +121,7 @@ class Wreddit
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res, ex: 10)
+        @client.set(@uri, res, ex: 60)
       end
     end
     return res
@@ -134,7 +134,7 @@ class Wreddit
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res, ex: 10)
+        @client.set(@uri, res, ex: 60)
       end
     end
     return res

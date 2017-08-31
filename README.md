@@ -16,6 +16,11 @@ gem 'wreddit'
 run ```bundle install``` in your app
 
 ## How to use
+#### REDIS
+This gem takes advantage of Redis caching which should help reduce the amount of error requests received by Reddit's Native API. You can't really make adjustments to the
+caching because caching is going to happen automatically. In order to use Redis, you **MUST** be running a redis-server to handle the hash maps of URLs and response objects.
+<br>
+
 As of v.1.0.2 we are using the Wreddit class.
 ###### Example of basic usage
 ```
