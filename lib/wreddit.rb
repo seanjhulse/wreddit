@@ -44,7 +44,12 @@ class Wreddit
   # unique parsing (currently only works in JSON)
   def links
     links = []
-    response = JSON.parse(self.json)
+    begin
+      response = JSON.parse(self.json)
+      begin
+    rescue JSON::ParserError, TypeError => e
+      puts e
+    end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         links.push(child['data']['url'])
@@ -57,7 +62,12 @@ class Wreddit
 
   def titles
     titles = []
-    response = JSON.parse(self.json)
+    begin
+      response = JSON.parse(self.json)
+      begin
+    rescue JSON::ParserError, TypeError => e
+      puts e
+    end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         titles.push(child['data']['title'])
@@ -70,7 +80,12 @@ class Wreddit
 
   def descriptions
     descriptions = []
-    response = JSON.parse(self.json)
+    begin
+      response = JSON.parse(self.json)
+      begin
+    rescue JSON::ParserError, TypeError => e
+      puts e
+    end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
         descriptions.push(child['data']['selftext'])
