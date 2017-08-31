@@ -48,6 +48,7 @@ class Wreddit
       response = JSON.parse(self.json)
     rescue JSON::ParserError, TypeError => e
       puts e
+      response = self.json
     end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
@@ -65,6 +66,7 @@ class Wreddit
       response = JSON.parse(self.json)
     rescue JSON::ParserError, TypeError => e
       puts e
+      response = self.json
     end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
@@ -82,6 +84,7 @@ class Wreddit
       response = JSON.parse(self.json)
     rescue JSON::ParserError, TypeError => e
       puts e
+      response = self.json
     end
     unless response['data']['children'].nil?
       response['data']['children'].each do |child|
@@ -95,63 +98,46 @@ class Wreddit
 
   # parse helpers
   def json
-    response = ''
     @uri+='.json'
     res = @client.get(@uri)
-    if res
-      # if res exists
-      return res
-    else
+    unless res
       # if res doesn't exist get it from HTTParty
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res, ex: 1)
-      else
-        # return 401, 429, or 500 error codes
+        @client.set(@uri, res , ex: 10)
+        res = @client.get(@uri)
         return res
       end
-      return res
     end
+    return res
   end
 
   def xml
     @uri+='.xml'
     res = @client.get(@uri)
-    if res
-      # if res exists
-      return res
-    else
+    unless res
       # if res doesn't exist get it from HTTParty
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res)
-      else
-        # return 401, 429, or 500 error codes
-        return res
+        @client.set(@uri, res, ex: 10)
       end
-      return res
     end
+    return res
   end
 
   def html
     res = @client.get(@uri)
-    if res
-      # if res exists
-      return res
-    else
+    unless res
       # if res doesn't exist get it from HTTParty
       res = HTTParty.get(URI(@uri))
       if res.code == 200
         # if res is an OK (we are getting data)
-        @client.set(@uri, res)
-      else
-        # return 401, 429, or 500 error codes
-        return res
+        @client.set(@uri, res, ex: 10)
       end
-      return res
     end
+    return res
   end
 
   # general parsing
