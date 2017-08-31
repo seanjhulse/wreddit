@@ -46,7 +46,6 @@ class Wreddit
     links = []
     begin
       response = JSON.parse(self.json)
-      begin
     rescue JSON::ParserError, TypeError => e
       puts e
     end
@@ -64,7 +63,6 @@ class Wreddit
     titles = []
     begin
       response = JSON.parse(self.json)
-      begin
     rescue JSON::ParserError, TypeError => e
       puts e
     end
@@ -82,7 +80,6 @@ class Wreddit
     descriptions = []
     begin
       response = JSON.parse(self.json)
-      begin
     rescue JSON::ParserError, TypeError => e
       puts e
     end
